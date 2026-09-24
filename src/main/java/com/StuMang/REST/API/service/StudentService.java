@@ -13,8 +13,12 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public void createStudent(Student stuCreReq){
+    public Student createStudent(Student stuCreReq){
+
+        System.out.println("inside service");
         // business;
-        studentRepository.saveStudent(stuCreReq);
+        Student stuRet = studentRepository.saveStudent(stuCreReq);
+        System.out.println("exit service");
+        return stuRet;
     }
 }
