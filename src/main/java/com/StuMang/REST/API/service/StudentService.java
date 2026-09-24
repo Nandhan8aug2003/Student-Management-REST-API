@@ -1,8 +1,20 @@
 package com.StuMang.REST.API.service;
 
-import org.springframework.stereotype.Component;
+import com.StuMang.REST.API.entity.Student;
+import com.StuMang.REST.API.repository.StudentRepository;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class StudentService {
 
+    private StudentRepository studentRepository;
+
+    StudentService(StudentRepository studentRepository){
+        this.studentRepository = studentRepository;
+    }
+
+    public void createStudent(Student stuCreReq){
+        // business;
+        studentRepository.saveStudent(stuCreReq);
+    }
 }

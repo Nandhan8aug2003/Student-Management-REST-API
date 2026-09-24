@@ -19,8 +19,8 @@ public class StudentController {
 
     //create
     @PostMapping("/create")
-    public void createStudent(@RequestBody Student student){
-        System.out.println(student.getName());
+    public void createStudent(@RequestBody Student stuCreReq){
+        studentService.createStudent(stuCreReq);
     }
 
     //read
