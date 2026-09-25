@@ -4,10 +4,7 @@ import com.StuMang.REST.API.entity.Student;
 import com.StuMang.REST.API.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/students")
@@ -27,7 +24,17 @@ public class StudentController {
     }
 
     //read
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id){
+        Student stuGet = studentService.getStudent(id);
 
+        if(stuGet != null) {
+            return ResponseEntity
+                    .status(200).body(stuGet);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
     //update
 
     //delete
