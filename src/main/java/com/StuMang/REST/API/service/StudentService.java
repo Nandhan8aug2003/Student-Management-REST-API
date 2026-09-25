@@ -14,11 +14,7 @@ public class StudentService {
     }
 
     public Student createStudent(Student stuCreReq){
-
-        System.out.println("inside service");
-        // business;
-        Student stuRet = studentRepository.saveStudent(stuCreReq);
-        System.out.println("exit service");
+        Student stuRet = studentRepository.save(stuCreReq);
         return stuRet;
     }
 }

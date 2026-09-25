@@ -22,9 +22,7 @@ public class StudentController {
     //create
     @PostMapping("/create")
     public ResponseEntity<Student> createStudent(@RequestBody Student stuCreReq){
-        System.out.println("inside controller");
         Student steRet = studentService.createStudent(stuCreReq);
-        System.out.println("exit controller");
         return ResponseEntity.status(HttpStatus.CREATED).body(steRet);
     }
 
