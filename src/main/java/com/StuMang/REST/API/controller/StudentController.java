@@ -2,6 +2,8 @@ package com.StuMang.REST.API.controller;
 
 import com.StuMang.REST.API.entity.Student;
 import com.StuMang.REST.API.service.StudentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +21,11 @@ public class StudentController {
 
     //create
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student stuCreReq){
+    public ResponseEntity<Student> createStudent(@RequestBody Student stuCreReq){
         System.out.println("inside controller");
         Student steRet = studentService.createStudent(stuCreReq);
         System.out.println("exit controller");
-        return steRet;
+        return ResponseEntity.status(HttpStatus.CREATED).body(steRet);
     }
 
     //read
