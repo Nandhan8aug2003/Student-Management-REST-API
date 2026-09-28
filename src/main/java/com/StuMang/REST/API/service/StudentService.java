@@ -38,4 +38,14 @@ public class StudentService {
         }
         return stuGet;
     }
+
+    public Student updateStudent(Student stuPutReq, Long id){
+        Optional<Student> isIdPresent = studentRepository.findById(id);
+
+        if(isIdPresent.isPresent()){
+            Student stuPut = studentRepository.save(stuPutReq);
+            return stuPut;
+        }
+        return null;
+    }
 }

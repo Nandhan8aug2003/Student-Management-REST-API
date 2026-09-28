@@ -50,7 +50,16 @@ public class StudentController {
 
         return ResponseEntity.notFound().build();
     }
+
     //update
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Student> getStudent(@RequestBody Student stuPutReq, @PathVariable Long id){
+        Student stuPut = studentService.updateStudent(stuPutReq, id);
+        if(stuPut == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(stuPut);
+    }
 
     //delete
 
