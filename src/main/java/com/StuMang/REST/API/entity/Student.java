@@ -3,10 +3,11 @@ package com.StuMang.REST.API.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+//design of the table
 @Entity
 public class Student {
 
-    @Id
+    @Id //primary key
     private Long id;
 
     private String name;

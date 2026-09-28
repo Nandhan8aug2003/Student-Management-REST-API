@@ -8,24 +8,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//handles request and response.
 @RestController
-@RequestMapping("/api/students")
+@RequestMapping("/api/students") //setting endpoint which is same through out
 public class StudentController {
 
+    //dependency injection instead of @autowired.
     private StudentService studentService;
 
     StudentController(StudentService studentService){
         this.studentService = studentService;
     }
 
-    //create
+    //createStudent
     @PostMapping("/create")
     public ResponseEntity<Student> createStudent(@RequestBody Student stuCreReq){
         Student steRet = studentService.createStudent(stuCreReq);
         return ResponseEntity.status(HttpStatus.CREATED).body(steRet);
     }
 
-    //read
+    //getStudent
     @GetMapping("/get/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id){
         Student stuGet = studentService.getStudent(id);
@@ -34,11 +36,10 @@ public class StudentController {
             return ResponseEntity
                     .status(200).body(stuGet);
         }
-
         return ResponseEntity.notFound().build();
     }
 
-    //readAll
+    //getAllStudent
     @GetMapping("/getAll")
     public ResponseEntity<List<Student>> getAllStudent(){
         List<Student> stuGet = studentService.getAllStudent();
@@ -51,7 +52,7 @@ public class StudentController {
         return ResponseEntity.notFound().build();
     }
 
-    //update
+    //updateStudent
     @PutMapping("/update/{id}")
     public ResponseEntity<Student> getStudent(@RequestBody Student stuPutReq, @PathVariable Long id){
         Student stuPut = studentService.updateStudent(stuPutReq, id);
@@ -61,7 +62,17 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(stuPut);
     }
 
-    //delete
+    //deleteStudent
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        Boolean isDeleted = studentService.delStudent(id);
 
+        if(!isDeleted){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).body("record deleted");
+    }
+
+    //softDelete
 
 }
