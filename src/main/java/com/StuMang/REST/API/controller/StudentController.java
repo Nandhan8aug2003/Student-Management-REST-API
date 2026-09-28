@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -27,6 +29,19 @@ public class StudentController {
     @GetMapping("/get/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id){
         Student stuGet = studentService.getStudent(id);
+
+        if(stuGet != null) {
+            return ResponseEntity
+                    .status(200).body(stuGet);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    //readAll
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Student>> getAllStudent(){
+        List<Student> stuGet = studentService.getAllStudent();
 
         if(stuGet != null) {
             return ResponseEntity
